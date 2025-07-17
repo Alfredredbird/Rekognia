@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+    <title>Facial Recognition App</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        form { border: 1px solid #ccc; padding: 20px; width: 400px; }
+        input, button { display: block; margin-top: 10px; width: 100%; }
+        .message { color: green; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h2>Facial Recognition</h2>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="message">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" enctype="multipart/form-data">
+        <label>Image:</label>
+        <input type="file" name="image" required>
+        
+        <label>Name (only for adding new):</label>
+        <input type="text" name="name">
+        
+        <button type="submit" name="action" value="add">Add Face</button>
+        <button type="submit" name="action" value="compare">Compare Face</button>
+    </form>
+</body>
+</html>
