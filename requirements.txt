@@ -3,3 +3,8 @@ face_recognition
 opencv-python
 numpy
 werkzeug
+BeautifulSoup4 
+requests
+rich
+selenium
+webdriver-manager
