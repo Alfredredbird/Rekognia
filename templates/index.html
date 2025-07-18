@@ -7,6 +7,9 @@
         form { border: 1px solid #ccc; padding: 20px; width: 400px; }
         input, button { display: block; margin-top: 10px; width: 100%; }
         .message { color: green; margin-top: 10px; }
+        .results { margin-top: 30px; }
+        .result { display: flex; align-items: center; margin-bottom: 10px; }
+        .result img { height: 64px; width: 64px; margin-right: 10px; object-fit: cover; border: 1px solid #aaa; }
     </style>
 </head>
 <body>
@@ -30,5 +33,22 @@
         <button type="submit" name="action" value="add">Add Face</button>
         <button type="submit" name="action" value="compare">Compare Face</button>
     </form>
+    <form method="POST" enctype="multipart/form-data">
+  <input type="file" name="image" required>
+  <input type="text" name="name" placeholder="Enter name" required>
+  <button type="submit">Upload & Train</button>
+</form>
+
+    {% if results %}
+    <div class="results">
+        <h3>Top 10 Closest Matches:</h3>
+        {% for result in results %}
+            <div class="result">
+                <img src="{{ url_for('static', filename='db_faces/' + result.name + '.jpg') }}" alt="{{ result.name }}">
+                <div>{{ result.name }} - Distance: {{ result.distance }}</div>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 </body>
 </html>
